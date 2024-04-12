@@ -10,21 +10,45 @@ from flask_login import login_required
 import datetime as dt
 
 
-@app.route('/clinic/map')
+@app.route('/mathLevel/algebra')
 @login_required
-def clinicMap():
+def algebra():
 
-    clinics = Clinic.objects()
+   
 
-    return render_template('cliniclocator.html',clinics=clinics)
+    return render_template('algebra.html')
 
-@app.route('/clinic/list')
+
+@app.route('/mathLevel/algebratwo')
 @login_required
-def clinicList():
+def algebraTwo():
 
-    clinics = Clinic.objects()
+    
 
-    return render_template('clinics.html',clinics=clinics)
+    return render_template('algebratwo.html')
+@app.route('/mathLevel/precalculus')
+@login_required
+def preCalculus():
+
+    
+
+    return render_template('precalculus.html')
+
+@app.route('/mathLevel/statistics')
+@login_required
+def statistics():
+
+    
+
+    return render_template('statistics.html')
+
+@app.route('/mathLevel/geom')
+@login_required
+def geometry():
+
+    
+
+    return render_template('geom.html')
 
 
 @app.route('/clinic/<clinicID>')
