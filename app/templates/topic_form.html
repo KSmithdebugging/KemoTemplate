@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h4 style="text-align: center; font-size: 30px;"><u> Math Topic Form </u></h4>
+<br>
+<div>
+    <form>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Math Level</label>
+            <div class="col-sm-10">
+                <select class="form-control form-control">
+                    <option>Algebra</option>
+                    <option>Algebra 2</option>
+                    <option>Geometry</option>
+                    <option>Pre-Calculus</option>
+                    <option>Statistics</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Topic Name</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Exponential Decay">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label class="form-label col-sm-2 col-form-label" for="customFile">Video</label>
+            <div class="col-sm-10">
+                <input type="file" accept="video/mp4,video/x-m4v,video/" class="form-control" id="customFile" />
+            </div>
+
+        </div>
+        <br>
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0"> 3 Practice Problems</legend>
+                <div class="col-sm-10">
+                    <h4>Practice Problem #1:</h4>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="If k(x) = 6x + 100 than k(-5)=">
+                    <br>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Type Answer Here</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="7">
+                        </div>
+                   
+                </div>
+                    <div class="col-sm-10">
+                        <h4>Practice Problem #2</h4>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="If k(x) = 6x + 100 than k(-5)=">
+                       <br>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Type Answer Here</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="7">
+                            </div>
+                       
+                    </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <h4>Practice Problem #3</h4>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="If k(x) = 6x + 100 than k(-5)=">
+                        <br>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Type Answer Here</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="7">
+                            </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+<br>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

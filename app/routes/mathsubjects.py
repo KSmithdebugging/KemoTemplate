@@ -18,6 +18,13 @@ def algebra():
 
     return render_template('algebra.html')
 
+@app.route('/mathLevel/createtopic')
+@login_required
+
+def topicForm():
+
+
+    return render_template('topic_form.html')
 
 @app.route('/mathLevel/algebratwo')
 @login_required
