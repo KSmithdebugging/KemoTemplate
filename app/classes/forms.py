@@ -13,15 +13,25 @@ class ProfileForm(FlaskForm):
     image = FileField("Image") 
     submit = SubmitField('Post')
 
-class BlogForm(FlaskForm):
-    subject = StringField('Subject', validators=[DataRequired()])
-    content = TextAreaField('Blog', validators=[DataRequired()])
-    tag = StringField('Tag', validators=[DataRequired()])
-    submit = SubmitField('Blog')
+class MathTopicForm(FlaskForm):
+    math_level = SelectField('Math Level', choices=[
+        ('algebra1', 'Algebra 1'), 
+        ('algebra2', 'Algebra 2'),
+        ('geometry', 'Geometry'), 
+        ('precalculus', 'Pre Calculus'), 
+        ('stats', 'Statistics')
+    ])
+    practice_problem_one = StringField('Practice Problem One',validators=[DataRequired()])
+    practice_problem_two= StringField('Practice Problem Two',validators=[DataRequired()])
+    practice_problem_three = StringField('Practice Problem Three',validators=[DataRequired()])
+    solution_one = StringField('Solution One',validators=[DataRequired()])
+    solution_two = StringField('Solution Two',validators=[DataRequired()])
+    solution_three = StringField('Solution Three',validators=[DataRequired()])
+    topic_name = StringField('Topic Name',validators=[DataRequired()])
+    tutorial_video = FileField('Tutorial Video')
+    submit = SubmitField('Submit')
+            
 
-class CommentForm(FlaskForm):
-    content = TextAreaField('Comment', validators=[DataRequired()])
-    submit = SubmitField('Comment')
 
 class ClinicForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])

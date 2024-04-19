@@ -1,5 +1,6 @@
 from app import app
 from app.utils.secrets import getSecrets
+from app.classes.forms import MathTopicForm
 import requests
 from flask import render_template, flash, redirect, url_for
 import requests
@@ -18,13 +19,12 @@ def algebra():
 
     return render_template('algebra.html')
 
-@app.route('/mathLevel/createtopic')
+@app.route('/mathLevel/createtopic', methods=['GET', 'POST'])
 @login_required
 
 def topicForm():
-
-
-    return render_template('topic_form.html')
+    form = MathTopicForm()
+    return render_template('topic_form.html', form=form)
 
 @app.route('/mathLevel/algebratwo')
 @login_required

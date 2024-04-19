@@ -4,33 +4,36 @@
 <h4 style="text-align: center; font-size: 30px;"><u> Math Topic Form </u></h4>
 <br>
 <div>
-    <form>
+    <form method="POST">
+        {{ form.hidden_tag() }}
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Math Level</label>
+            {{ form.math_level.label }}
             <div class="col-sm-10">
-                <select class="form-control form-control">
-                    <option>Algebra</option>
-                    <option>Algebra 2</option>
-                    <option>Geometry</option>
-                    <option>Pre-Calculus</option>
-                    <option>Statistics</option>
-                </select>
+                {{ form.math_level() }}
+                {% for error in form.math_level.errors %}
+            </div>
+            <br> <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <br>
+        <div class="form-group row">
+            {{form.topic_name.label }}
+            <div class="col-sm-10">
+                {{ form.topic_name() }}
+                {% for error in form.topic_name.errors %}
+                <br> <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
             </div>
         </div>
         <br>
         <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Topic Name</label>
+            {{ form.tutorial_video.label }}
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Exponential Decay">
+                {{ form.tutorial_video() }}
+                {% for error in form.tutorial_video.errors %}
             </div>
-        </div>
-        <br>
-        <div class="form-group row">
-            <label class="form-label col-sm-2 col-form-label" for="customFile">Video</label>
-            <div class="col-sm-10">
-                <input type="file" accept="video/mp4,video/x-m4v,video/" class="form-control" id="customFile" />
-            </div>
-
+            <br> <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </div>
         <br>
         <fieldset class="form-group">
@@ -38,45 +41,55 @@
                 <legend class="col-form-label col-sm-2 pt-0"> 3 Practice Problems</legend>
                 <div class="col-sm-10">
                     <h4>Practice Problem #1:</h4>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="If k(x) = 6x + 100 than k(-5)=">
+                    {{ form.practice_problem_one() }}
+                    {% for error in form.practice_problem_one.errors %}
+                    <br> <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
                     <br>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Type Answer Here</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" placeholder="7">
                         </div>
-                   
-                </div>
+
+                    </div>
                     <div class="col-sm-10">
                         <h4>Practice Problem #2</h4>
-                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="If k(x) = 6x + 100 than k(-5)=">
-                       <br>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Type Answer Here</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="7">
-                            </div>
-                       
-                    </div>
-                    </div>
-                    <div class="col-sm-10">
-                        <h4>Practice Problem #3</h4>
-                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="If k(x) = 6x + 100 than k(-5)=">
+                        {{ form.practice_problem_two() }}
+                        {% for error in form.practice_problem_two.errors %}
+                        <br> <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
                         <br>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Type Answer Here</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="7">
                             </div>
-                       
+
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <h4>Practice Problem #3</h4>
+                        {{ form.practice_problem_three() }}
+                        {% for error in form.practice_problem_three.errors %}
+                        <br> <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                        <br>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Type Answer Here</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="7">
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
         </fieldset>
-<br>
+        <br>
         <div class="form-group row">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                {{ form.submit() }}
+
             </div>
         </div>
     </form>
