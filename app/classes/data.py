@@ -18,7 +18,6 @@ import datetime as dt
 import jwt
 from time import time
 from bson.objectid import ObjectId
-from flask_security import RoleMixin
 from functools import wraps
 
 
@@ -35,7 +34,6 @@ class User(UserMixin, Document):
     email = EmailField()
     image = FileField()
     prononuns = StringField()
-    roles = ListField(ReferenceField("Role"))
 
     meta = {
         'ordering': ['lname','fname']

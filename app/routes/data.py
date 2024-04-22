@@ -17,7 +17,6 @@ from bson.objectid import ObjectId
 
 
 class User(UserMixin, Document):
-    role = StringField()
     gid = StringField(sparse=True, unique=True)
     gname = StringField()
     gprofile_pic = StringField()

@@ -1,21 +1,21 @@
-from app import app
-import mongoengine.errors
-from flask import render_template, flash, redirect, url_for
-from flask_login import current_user, login_required
-from app.classes.data import require_role,Role,User
-import datetime as dt
+# from app import app
+# import mongoengine.errors
+# from flask import render_template, flash, redirect, url_for
+# from flask_login import current_user, login_required
+# from app.classes.data import require_role,Role,User
+# import datetime as dt
 
-@app.route('/admintest')
-@require_role('admin')
-def admintest():
-    return redirect('/')
+# @app.route('/admintest')
+# @require_role('admin')
+# def admintest():
+#     return redirect('/')
 
-@app.route('/listroles')
-def listroles():
-    roles = Role.objects()
-    for role in roles:
-        flash(role.name)
-    return render_template('index.html')
+# @app.route('/listroles')
+# def listroles():
+#     roles = Role.objects()
+#     for role in roles:
+#         flash(role.name)
+#     return render_template('index.html')
 
 # These are commented out because they should not be generally available. Uncomment them to run them once.
 
