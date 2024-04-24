@@ -30,7 +30,7 @@ class MathTopicForm(FlaskForm):
     solution_two = StringField('Solution Two',validators=[DataRequired()])
     solution_three = StringField('Solution Three',validators=[DataRequired()])
     topic_name = StringField('Topic Name',validators=[DataRequired()])
-    tutorial_video = FileField('Tutorial Video')
+    tutorial_video = StringField('Tutorial Video')
     submit = SubmitField('Submit')
             
 

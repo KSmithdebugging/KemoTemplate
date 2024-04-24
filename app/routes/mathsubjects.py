@@ -5,8 +5,8 @@ import requests
 from flask import render_template, flash, redirect, url_for
 import requests
 from flask_login import current_user
-from app.classes.forms import ClinicForm
-from app.classes.data import newTopic, User, Clinic
+from app.classes.forms import ClinicForm, MathTopicForm
+from app.classes.data import User, Clinic, newTopic
 from flask_login import login_required
 import datetime as dt
 
@@ -26,22 +26,22 @@ def topicForm():
     form = MathTopicForm()
     if form.validate_on_submit():
         print("Form data:", form.data)
-        newMathTopic = MathTopic(
-            math_level = form.math_level.data,
-            practice_problem_one = form.practice_problem_one.data,
-            practice_problem_two = form.practice_problem_two.data,
-            practice_problem_three = form.practice_problem_three.data,
-            solution_one = form.solution_one.data,
-            solution_two = form.solution_two.data,
-            solution_three = form.solution_three.data,
-            topic_name = form.topic_name.data
-            
-
+        newMathTopic = newTopic(
+            mathLevel = form.math_level.data,
+            practiceProblemOne = form.practice_problem_one.data,
+            practiceProblemTwo = form.practice_problem_two.data,
+            practiceProblemThree = form.practice_problem_three.data,
+            solutionOne = form.solution_one.data,
+            solutionTwo = form.solution_two.data,
+            solutionThree = form.solution_three.data,
+            topicName = form.topic_name.data,
+            tutorialVideo = form.tutorial_video.data,
+            newMathTopic =  form.topic_name.data
         )
+    
         newMathTopic.save()
         flash('New math topic created successfully!', 'success')
         return redirect(url_for("algebra"))
-    return render_template('topic_form.html', form=form)
     return render_template('topic_form.html', form=form)
 
 @app.route('/mathLevel/algebratwo')

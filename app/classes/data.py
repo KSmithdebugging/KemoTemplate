@@ -107,10 +107,10 @@ class newTopic(Document):
     mathLevel = StringField()
     practiceProblemOne = StringField()
     practiceProblemTwo = StringField()
-    prscticeProblemThree = StringField()
+    practiceProblemThree = StringField()
     solutionOne = StringField()
     solutionTwo = StringField()
     solutionThree = StringField()
-    tutorialVideo = FileField()
+    tutorialVideo = StringField()
     topicName = StringField()
             

@@ -13,14 +13,16 @@ def newTopic():
     if form.validate_on_submit():
         print("Form data:", form.data)
         newMathTopic = MathTopic(
-            math_level = form.math_level.data,
-            practice_problem_one = form.practice_problem_one.data,
-            practice_problem_two = form.practice_problem_two.data,
-            practice_problem_three = form.practice_problem_three.data,
-            solution_one = form.solution_one.data,
-            solution_two = form.solution_two.data,
-            solution_three = form.solution_three.data,
-            topic_name = form.topic_name.data
+            mathLevel = form.math_level.data,
+            practiceProblemOne = form.practice_problem_one.data,
+            practiceProblemTwo = form.practice_problem_two.data,
+            practiceProblemThree = form.practice_problem_three.data,
+            solutionOne = form.solution_one.data,
+            solutionTwo = form.solution_two.data,
+            solutionThree = form.solution_three.data,
+            topicName = form.topic_name.data,
+            tutorialVideo = form.tutorial_video.data,
+            newMathTopic =  form.topic_name.data
             
 
         )

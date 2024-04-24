@@ -46,10 +46,16 @@
                     <br> <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                     <br>
+
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Type Answer Here</label>
+                        {{form.solution_one.label }}
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="7">
+                            {{ form.solution_one() }}
+                            {% for error in form.solution_one.errors %}
+                            <br> <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+
+
                         </div>
 
                     </div>
@@ -61,29 +67,37 @@
                         {% endfor %}
                         <br>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Type Answer Here</label>
+                            {{form.solution_two.label }}
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="7">
-                            </div>
+                                {{ form.solution_two() }}
+                                {% for error in form.solution_two.errors %}
+                                <br> <span style="color: red;">[{{ error }}]</span>
+                                {% endfor %}
 
+
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <h4>Practice Problem #3</h4>
+                            {{ form.practice_problem_three() }}
+                            {% for error in form.practice_problem_three.errors %}
+                            <br> <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                            <br>
+                            <div class="form-group row">
+                                {{ form.solution_three.label }}
+                                <div class="col-sm-10">
+                                    {{ form.solution_three() }}
+                                    {% for error in form.solution_three.errors %}
+                                    <br> <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+
+
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-10">
-                        <h4>Practice Problem #3</h4>
-                        {{ form.practice_problem_three() }}
-                        {% for error in form.practice_problem_three.errors %}
-                        <br> <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
-                        <br>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Type Answer Here</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="7">
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
         </fieldset>
         <br>
         <div class="form-group row">
