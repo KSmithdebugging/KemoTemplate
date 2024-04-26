@@ -20,11 +20,9 @@ db = client[secrets['MONGO_DB_NAME']]
 collection = db["new_topic"]
 DEFAULT_THUMBNAIL_URL = "/static/default.jpg"
 
-@app.route('/mathLevel/algebra', methods=['GET'])
-@login_required
-def algebra():
+def retrieveTopics():
     topics = []
-    data = list(collection.find().limit(3))
+    data = list(collection.find().limit(9))
     for item in data:
         if 'tutorialVideo' in item:
             youtube_url = item['tutorialVideo']
@@ -36,15 +34,44 @@ def algebra():
                 print(f"Error extracting thumbnail for {youtube_url}: {e}")
                 item['thumbnail_url'] = DEFAULT_THUMBNAIL_URL
     print(data)
-    return render_template('algebra.html', data=data)
+    return data
+
+
+@app.route('/mathLevel/algebra', methods=['GET'])
+@login_required
+def algebra():
+    foundTopics = retrieveTopics()
+    return render_template('algebra.html', foundTopics = foundTopics)
 
 @app.route('/mathLevel/topics', methods=['GET', 'POST'])
 @login_required
 def topics():
-    topics = []
+    topic = []
     document_id = request.args.get('id')
     topic = collection.find_one({'_id': ObjectId(document_id)})
+    item_id = request.args.get('id')
+    form_errors = None
+    # Check input answers after submitting a POST request before redirecting
+    if request.method == 'POST':
+        first_solution =  request.form.get('1stSolution')
+        second_solution =  request.form.get('2ndSolution')
+        third_solution = request.form.get('3rdSolution')
+        if first_solution != topic.get('solutionOne'):
+            print(first_solution)
+            print(topic.get('solutionOne'))
+            form_errors = True
+            flash('First answer is wrong!')
+        elif second_solution != topic.get('solutionTwo'):
+            flash('Second answer is wrong!')
+            form_errors = True
+        elif third_solution != topic.get('solutionThree'):
+            flash('Third answer is wrong!')
+            form_errors = True
+        else:
+            flash('New Topic Learned!', 'success')
+            return render_template('index.html', form_submitted=True)
     return render_template('topics.html', data=[topic])
+    
 
 @app.route('/mathLevel/createtopic', methods=['GET', 'POST'])
 @login_required
@@ -74,33 +101,33 @@ def topicForm():
 @app.route('/mathLevel/algebratwo')
 @login_required
 def algebraTwo():
-
+    foundTopics = retrieveTopics()
     
 
-    return render_template('algebratwo.html')
+    return render_template('algebratwo.html', foundTopics = foundTopics)
 @app.route('/mathLevel/precalculus')
 @login_required
 def preCalculus():
-
+    foundTopics = retrieveTopics()
     
 
-    return render_template('precalculus.html')
+    return render_template('precalculus.html', foundTopics = foundTopics)
 
 @app.route('/mathLevel/statistics')
 @login_required
 def statistics():
-
+    foundTopics = retrieveTopics()
     
 
-    return render_template('statistics.html')
+    return render_template('statistics.html', foundTopics = foundTopics)
 
 @app.route('/mathLevel/geom')
 @login_required
 def geometry():
-
+    foundTopics = retrieveTopics()
     
 
-    return render_template('geom.html')
+    return render_template('geom.html', foundTopics = foundTopics)
 
 
 @app.route('/clinic/<clinicID>')

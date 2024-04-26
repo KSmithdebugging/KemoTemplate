@@ -8,21 +8,33 @@
     </iframe>
 </div>
 <br>
-<div>
-    <h2>Practice Problems </h2>
-    <h5>First Problem</h5>
-    <label>Question: {{ item.practiceProblemOne }}</label> <br>
-    <label for="1stSolution">Answer: </label>
-    <input id="1stSolution">
-    <h5>Second Problem</h5>
-    <labeL>Question: {{ item.practiceProblemTwo }}</labeL><br>
-    <label for="2ndSolution">Answer: </label>
-    <input id="2ndSolution">
-    <h5>Third Problem</h5>
-    <labeL>Question: {{ item.practiceProblemThree }}</labeL><br>
-    <label for="3rdSolution">Answer: </label>
-    <input id="3rdSolution"><br><br>
-    <input type="submit" value="Check Answers">
+<form method="post">
+    <div>
+        <h2>Practice Problems </h2>
+        <h5>First Problem</h5>
+        <label>Question: {{ item.practiceProblemOne }}</label> <br>
+        <label for="1stSolution">Answer: </label>
+        <input id="1stSolution" name="1stSolution" {% if request.method == 'POST' %} value="{{ request.form.get('1stSolution') }}" {% endif %}>
+        <h5>Second Problem</h5>
+        <labeL>Question: {{ item.practiceProblemTwo }}</labeL><br>
+        <label for="2ndSolution">Answer: </label>
+        <input id="2ndSolution" name="2ndSolution" {% if request.method == 'POST' %} value="{{ request.form.get('2ndSolution') }}" {% endif %}>
+        <h5>Third Problem</h5>
+        <labeL>Question: {{ item.practiceProblemThree }}</labeL><br>
+        <label for="3rdSolution">Answer: </label>
+        <input id="3rdSolution" name="3rdSolution" {% if request.method == 'POST' %} value="{{ request.form.get('3rdSolution') }}" {% endif %}><br><br>
+        <input type="submit" value="Check Answers">
+</form>
+{% if form_submitted %}
+<div class="alert alert-success" role="alert">
+</div>
+{% endif %}
+{% if form_errors %}
+<div class="alert alert-danger" role="alert">
+    {{ form_errors }}
+</div>
+{% endif %}
+
 </div>
 
 {% endfor %}
