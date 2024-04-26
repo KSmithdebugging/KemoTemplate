@@ -2,22 +2,49 @@ from app import app
 from app.utils.secrets import getSecrets
 from app.classes.forms import MathTopicForm
 import requests
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 import requests
 from flask_login import current_user
 from app.classes.forms import ClinicForm, MathTopicForm
 from app.classes.data import User, Clinic, newTopic
 from flask_login import login_required
+import secrets
+from pymongo import MongoClient
 import datetime as dt
+from pytube import YouTube
+from bson import ObjectId
 
+secrets = getSecrets()
+client = MongoClient(secrets['MONGO_HOST'])
+db = client[secrets['MONGO_DB_NAME']]
+collection = db["new_topic"]
+DEFAULT_THUMBNAIL_URL = "/static/default.jpg"
 
-@app.route('/mathLevel/algebra')
+@app.route('/mathLevel/algebra', methods=['GET'])
 @login_required
 def algebra():
+    topics = []
+    data = list(collection.find().limit(3))
+    for item in data:
+        if 'tutorialVideo' in item:
+            youtube_url = item['tutorialVideo']
+            try:
+                yt = YouTube(youtube_url)
+                thumbnail_url = yt.thumbnail_url
+                item['thumbnail_url'] = thumbnail_url
+            except Exception as e:
+                print(f"Error extracting thumbnail for {youtube_url}: {e}")
+                item['thumbnail_url'] = DEFAULT_THUMBNAIL_URL
+    print(data)
+    return render_template('algebra.html', data=data)
 
-   
-
-    return render_template('algebra.html')
+@app.route('/mathLevel/topics', methods=['GET', 'POST'])
+@login_required
+def topics():
+    topics = []
+    document_id = request.args.get('id')
+    topic = collection.find_one({'_id': ObjectId(document_id)})
+    return render_template('topics.html', data=[topic])
 
 @app.route('/mathLevel/createtopic', methods=['GET', 'POST'])
 @login_required

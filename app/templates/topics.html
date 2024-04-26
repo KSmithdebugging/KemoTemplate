@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{% for item in data %}
+<h4 style="text-align: center; text-decoration: underline;">{{ item.mathLevel }}: {{ item.topicName}}</h4>
+<div><iframe style="margin: 0 auto; display: block;" width="70%" height="400px" src="{{ item.tutorialVideo }}">
+    </iframe>
+</div>
+<br>
+<div>
+    <h2>Practice Problems </h2>
+    <h5>First Problem</h5>
+    <label>Question: {{ item.practiceProblemOne }}</label> <br>
+    <label for="1stSolution">Answer: </label>
+    <input id="1stSolution">
+    <h5>Second Problem</h5>
+    <labeL>Question: {{ item.practiceProblemTwo }}</labeL><br>
+    <label for="2ndSolution">Answer: </label>
+    <input id="2ndSolution">
+    <h5>Third Problem</h5>
+    <labeL>Question: {{ item.practiceProblemThree }}</labeL><br>
+    <label for="3rdSolution">Answer: </label>
+    <input id="3rdSolution"><br><br>
+    <input type="submit" value="Check Answers">
+</div>
+
+{% endfor %}
+
+{% endblock %}

@@ -28,6 +28,7 @@
         <br>
         <div class="form-group row">
             {{ form.tutorial_video.label }}
+            <h6>(Link must be a Youtube Embedded Url)</h6>
             <div class="col-sm-10">
                 {{ form.tutorial_video() }}
                 {% for error in form.tutorial_video.errors %}

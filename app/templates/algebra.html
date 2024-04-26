@@ -7,15 +7,19 @@
 </div>
 <div class="container" style="margin:50px 25px 50px 25px;">
     <div class="row">
-      <div class="col-sm">
-       <img src="https://i.ytimg.com/vi/8lT00iLntFc/maxresdefault.jpg" height="300" width="300">
-      </div>
-      <div class="col-sm">
-        <img src="https://i.ytimg.com/vi/8lT00iLntFc/maxresdefault.jpg" height="300" width="300">
-      </div>
-      <div class="col-sm">
-        <img src="https://i.ytimg.com/vi/8lT00iLntFc/maxresdefault.jpg" height="300" width="300">
+      {% for item in data %}
+      <div class="col-md-4">
+        <div class="card mb-4">
+       <a href='/mathLevel/topics?id={{ item._id }}'><img style=" width: 100%;
+        height: 300px; object-fit: fill;
+        " src="{{ item.thumbnail_url }}" alt="Thumbnail" ></a>
+       <div class="card-body" style="height: 70px;">
+        <h5 class="card-title">{{ item.newMathTopic }}</h5>
+    </div>
       </div>
     </div>
+    {% endfor %}
   </div>
+  </div>
+
 {% endblock %}
