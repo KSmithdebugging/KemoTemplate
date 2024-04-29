@@ -23,6 +23,7 @@
         <labeL>Question: {{ item.practiceProblemThree }}</labeL><br>
         <label for="3rdSolution">Answer: </label>
         <input id="3rdSolution" name="3rdSolution" {% if request.method == 'POST' %} value="{{ request.form.get('3rdSolution') }}" {% endif %}><br><br>
+        
         <input type="submit" value="Check Answers">
 </form>
 {% if form_submitted %}
