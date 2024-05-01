@@ -23,7 +23,14 @@
         <labeL>Question: {{ item.practiceProblemThree }}</labeL><br>
         <label for="3rdSolution">Answer: </label>
         <input id="3rdSolution" name="3rdSolution" {% if request.method == 'POST' %} value="{{ request.form.get('3rdSolution') }}" {% endif %}><br><br>
-        <input type="submit" value="Check Answers">
+        <h4>Rate the Lesson</h4>
+        <span class="fa fa-star checked" id="star" onclick="checkStar('star')"></span>
+<span class="fa fa-star" id="star2" onclick="checkStar('star2')"></span>
+<span class="fa fa-star" id="star3" onclick="checkStar('star3')"></span>
+<span class="fa fa-star" id="star4" onclick="checkStar('star4')"></span>
+<span class="fa fa-star" id="star5" onclick="checkStar('star5')"></span>
+<br>
+        <input type="submit" value="Check Answers" onclick="checkRating()">
 </form>
 {% if form_submitted %}
 <div class="alert alert-success" role="alert">
@@ -38,5 +45,31 @@
 </div>
 
 {% endfor %}
-
+<script>
+    function checkStar(star) {
+        var stars = document.getElementById(star);
+        if (stars.style.color != "yellow") {
+        stars.style.color = "yellow";
+    } else {
+        stars.style.color = "black";
+    }
+}
+    function checkRating() {
+    var star = document.getElementById("star");
+    var star2 = document.getElementById("star2");
+    var star3 = document.getElementById("star3");
+    var star4 = document.getElementById("star4");
+    var star5 = document.getElementById("star5");
+    var stars = [star, star2, star3, star4, star5];
+    currentRating = 0;
+    stars.forEach(function(star) {
+        if(star.style.color == "yellow") {
+            currentRating++;
+        }
+    });
+    return currentRating;
+    alert("This lesson is " + currentRating + " stars.");
+    localStorage.setItem(currentRating);
+    }
+</script>
 {% endblock %}

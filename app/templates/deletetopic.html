@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h4>Delete or Update Topic</h4>
+<form  method="post">
+    {% for item in foundTopics %}
+    <input type="checkbox" name="topic" value="{{ item._id }}">
+    <label for="vehicle1">{{item.mathLevel }}: {{ item.topicName }}</label><br>
+    {% endfor %}
+    <input type="submit" value="Delete Selected Topics">
+  </form>
+
+{% endblock %}

@@ -98,6 +98,18 @@ def topicForm():
         return redirect(url_for("algebra"))
     return render_template('topic_form.html', form=form)
 
+
+@app.route('/mathLevel/deletetopic', methods=["GET","POST"])
+@login_required
+def deleteTopic():
+    if request.method == "POST":
+        selected_topics = request.form.getlist('topic')
+        for topic_id in selected_topics:
+            collection.delete_one({'_id': ObjectId(topic_id)})
+        return render_template('algebra.html')
+    foundTopics = retrieveTopics()
+    return render_template('deletetopic.html', foundTopics = foundTopics)
+
 @app.route('/mathLevel/algebratwo')
 @login_required
 def algebraTwo():
