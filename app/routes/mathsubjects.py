@@ -36,6 +36,10 @@ def retrieveTopics():
     print(data)
     return data
 
+@app.route('/aboutUs', methods=['GET'])
+@login_required
+def aboutUs():
+    return render_template('aboutUs.html')
 
 @app.route('/mathLevel/algebra', methods=['GET'])
 @login_required
@@ -100,22 +104,52 @@ def topicForm():
 
 @app.route('/mathLevel/updatetopic', methods=["GET","POST","PUT"])
 @login_required
-def updateTopic(topic_id):
+def updateTopicRedirect():
     foundTopics = retrieveTopics()
-    topic = None
-    for t in foundTopics:
-        if t['_id'] == topic_id:
-            topic = t
-            break
     if request.method == "POST":
-        selected_topic_id = request.form.get("topic")
+        topic_id = request.form.get("topic_id")
         selected_topic = None
         for topic in foundTopics:
-            if str(topic['_id']) == selected_topic_id:
+            if str(topic['_id']) == topic_id:
                 selected_topic = topic
+                print("So", selected_topic)
                 break
-        return redirect(url_for('updateTopicInfo', topic_id=topic_id))
-    return render_template('updatetopic.html', topic=topic)
+        return render_template('updateTopicInfo.html', topic=selected_topic)
+    else:
+        return render_template('updatetopic.html', foundTopics=foundTopics)
+    
+@app.route('/mathLevel/updateTopicInfo/<topic_id>', methods=["POST"])
+@login_required
+def updateTopicInfo(topic_id):
+    tutorial_video = request.form.get("tutorial_video")
+    practice_problem_one = request.form.get("practice_problem_one")
+    solution_one = request.form.get("solution_one")
+    practice_problem_two = request.form.get("practice_problem_two")
+    solution_two = request.form.get("solution_two")
+    practice_problem_three = request.form.get("practice_problem_three")
+    solution_three = request.form.get("solution_three")
+
+    update_topic(topic_id, tutorial_video, practice_problem_one, solution_one, practice_problem_two, solution_two, practice_problem_three, solution_three)
+    flash('Topic updated successfully!', 'success')
+    return redirect(url_for('updateTopicRedirect'))
+
+def update_topic(topic_id, tutorial_video, practice_problem_one, solution_one, practice_problem_two, solution_two, practice_problem_three, solution_three):
+    # Find the topic by its ID and update its fields
+    collection.update_one(
+        {'_id': ObjectId(topic_id)},
+        {
+            '$set': {
+                'tutorialVideo': tutorial_video,
+                'practiceProblemOne': practice_problem_one,
+                'solutionOne': solution_one,
+                'practiceProblemTwo': practice_problem_two,
+                'solutionTwo': solution_two,
+                'practiceProblemThree': practice_problem_three,
+                'solutionThree': solution_three
+            }
+        }
+    )
+
 
 @app.route('/mathLevel/deletetopic', methods=["GET","POST"])
 @login_required

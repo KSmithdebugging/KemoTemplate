@@ -4,19 +4,23 @@
 <h4>Update Topic</h4>
 <form  method="post">
   <div class="row">
-  <div class="col-md-4" class="form-check" style="display: inline-block;">
-    <div class="card mb-4" style="height: 400px;">
-    {% for item in foundTopics %}
-
-    <input type="radio" name="topic" class="form-check-input" value="{{ item._id }}">
-    <label class="form-check-label">{{item.mathLevel }}: {{ item.topicName }}</label><br>
-    {% endfor %}
-    <input type="submit" value="Update A Topic"  class="btn btn-primary mt-auto">
+    <div class="col-md-4 form-check" style="display: inline-block;">
+      <div class="card mb-4" style="height: 400px;">
+        <label for="topic">Select Topic:</label>
+        {% for topic in foundTopics %}
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="topic_id" id="topic_{{ topic._id }}" value="{{ topic._id }}">
+            <label class="form-check-label" for="topic_{{ topic._id }}">
+              {{ topic.mathLevel}}: {{ topic.topicName }}
+            </label>
+          </div>
+        {% endfor %}
+        <input type="submit" value="Update A Topic"  class="btn btn-primary mt-auto">
       </div>
     </div>
     <div class="col-md-4" style="display: inline-block; margin-left: 10%;">
       <img src="/static/update.png" width="175%" height="auto">
     </div>
   </div>
-  </form>
+</form>
 {% endblock %}

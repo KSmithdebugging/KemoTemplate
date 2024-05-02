@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block body %}
+<h2 style="text-align: center;">About Our Team</h2>
+<div style="width: 100%">
+    <div style="display:inline-block; vertical-align: top;">
+        <img src="/static/logo.png" width="400" height="auto">
+    </div>
+    <div style="display: inline-block; vertical-align: top;">
+        <div class="card"
+            style="width: 200px; display: inline-block; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s; margin: 10px; margin-right: 100px;">
+            <img src="/static/kLogo.jpeg" alt="Avatar" style="width:100%">
+            <div class="container" style="padding: 2px 16px;">
+                <h4><b>Kemo</b></h4>
+                <p>CEO/Full Stack Developer</p>
+            </div>
+        </div>
+        <div class="card"
+            style="width: 200px; height:302px; display: inline-block; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s; margin: 9px; vertical-align: top;">
+            <img src="/static/jLogo.png" alt="Avatar" style="width:100%">
+            <div class="container" style="padding: 2px 16px;">
+                <h4><b> Jimmy </b></h4>
+                <p>Full Stack Developer</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="
+border:10px solid white;">
+    <div style="text-align:center; padding: 20px;">
+        <h1><u>Our Mission</u></h1>
+        <p style="font-size: 25px; line-height: 2; margin-left: 5%; margin-right:5%;"><i>Hoopin' Through Arithmetics</i> strives to provide an engaging education to students who are struggling with math and need additional support outside the classroom. We offer licensed tutors who provide accredited lessons for students to complete, allowing them to earn high school credits. We cover hundreds of topics for any math subject as well practice problems to demonstrate mastery!</p>
+    </div>
+    
+{% endblock %}

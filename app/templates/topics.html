@@ -1,51 +1,63 @@
+
 {% extends "base.html" %}
 
 {% block body %}
 
 {% for item in data %}
 <h4 style="text-align: center; text-decoration: underline;">{{ item.mathLevel }}: {{ item.topicName}}</h4>
-<div><iframe style="margin: 0 auto; display: block;" width="70%" height="400px" src="{{ item.tutorialVideo }}">
-    </iframe>
+<div style="display: flex; align-items: flex-start;">
+    <div style="flex: 1; margin-left: 5%;">
+        <iframe width="125%" height="500px" src="{{ item.tutorialVideo }}"></iframe>
+    </div>
+    <div style="flex: 1; margin-left: 15%;">
+        <form method="post">
+            <div>
+                <h2>Practice Problems </h2>
+                <h5>First Problem</h5>
+                <label>Question: {{ item.practiceProblemOne }}</label> <br>
+                <label for="1stSolution">Answer: </label>
+                <input id="1stSolution" name="1stSolution" {% if request.method == 'POST' %} value="{{ request.form.get('1stSolution') }}" {% endif %} style="width: 50%;">
+                <h5>Second Problem</h5>
+                <label>Question: {{ item.practiceProblemTwo }}</label><br>
+                <label for="2ndSolution">Answer: </label>
+                <input id="2ndSolution" name="2ndSolution" {% if request.method == 'POST' %} value="{{ request.form.get('2ndSolution') }}" {% endif %} style="width: 50%;">
+                <h5>Third Problem</h5>
+                <label>Question: {{ item.practiceProblemThree }}</label><br>
+                <label for="3rdSolution">Answer: </label>
+                <input id="3rdSolution" name="3rdSolution" {% if request.method == 'POST' %} value="{{ request.form.get('3rdSolution') }}" {% endif %} style="width: 50%;"><br><br>
+                <h4>Rate the Lesson</h4>
+                <span class="fa fa-star checked" id="star" onclick="checkStar('star')"></span>
+                <span class="fa fa-star" id="star2" onclick="checkStar('star2')"></span>
+                <span class="fa fa-star" id="star3" onclick="checkStar('star3')"></span>
+                <span class="fa fa-star" id="star4" onclick="checkStar('star4')"></span>
+                <span class="fa fa-star" id="star5" onclick="checkStar('star5')"></span>
+                <br>
+                <input type="submit" value="Check Answers" onclick="checkRating()">
+            </div>
+        </form>
+        {% if form_submitted %}
+        <div class="alert alert-success" role="alert">
+            {{ flash('New Topic Learned!', 'success') }}
+        </div>
+        {% endif %}
+        {% if form_errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ flash('Please change at least one input value before submitting.', 'danger') }}
+        </div>
+        {% endif %}
+    </div>
 </div>
-<br>
-<form method="post">
-    <div>
-        <h2>Practice Problems </h2>
-        <h5>First Problem</h5>
-        <label>Question: {{ item.practiceProblemOne }}</label> <br>
-        <label for="1stSolution">Answer: </label>
-        <input id="1stSolution" name="1stSolution" {% if request.method == 'POST' %} value="{{ request.form.get('1stSolution') }}" {% endif %}>
-        <h5>Second Problem</h5>
-        <labeL>Question: {{ item.practiceProblemTwo }}</labeL><br>
-        <label for="2ndSolution">Answer: </label>
-        <input id="2ndSolution" name="2ndSolution" {% if request.method == 'POST' %} value="{{ request.form.get('2ndSolution') }}" {% endif %}>
-        <h5>Third Problem</h5>
-        <labeL>Question: {{ item.practiceProblemThree }}</labeL><br>
-        <label for="3rdSolution">Answer: </label>
-        <input id="3rdSolution" name="3rdSolution" {% if request.method == 'POST' %} value="{{ request.form.get('3rdSolution') }}" {% endif %}><br><br>
-        <h4>Rate the Lesson</h4>
-        <span class="fa fa-star checked" id="star" onclick="checkStar('star')"></span>
-<span class="fa fa-star" id="star2" onclick="checkStar('star2')"></span>
-<span class="fa fa-star" id="star3" onclick="checkStar('star3')"></span>
-<span class="fa fa-star" id="star4" onclick="checkStar('star4')"></span>
-<span class="fa fa-star" id="star5" onclick="checkStar('star5')"></span>
-<br>
-        <input type="submit" value="Check Answers" onclick="checkRating()">
-</form>
-{% if form_submitted %}
-<div class="alert alert-success" role="alert">
-</div>
-{% endif %}
-{% if form_errors %}
-<div class="alert alert-danger" role="alert">
-    {{ form_errors }}
-</div>
-{% endif %}
-
-</div>
-
 {% endfor %}
+
 <script>
+    function checkRating() {
+        var checkedStars = document.querySelectorAll('.fa-star.checked').length;
+        if (checkedStars === 0) {
+            alert("Please rate the lesson before submitting.");
+            return false;
+        }
+    }
+
     function checkStar(star) {
         var stars = document.getElementById(star);
         if (stars.style.color != "yellow") {

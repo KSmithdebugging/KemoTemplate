@@ -3,35 +3,75 @@
 {% block body %}
 <h1>Update Topic Information</h1>
 
-<form method="post">
+<form method="post" onsubmit="return checkChanges()"  action="{{ url_for('updateTopicInfo', topic_id=topic._id) }}">
+    <input type="hidden" name="topic_id" value="{{ topic._id }}">
     <div class="form-group">
         <label for="tutorial_video">Tutorial Video</label>
-        <input type="text" class="form-control" id="tutorial_video" name="tutorial_video" value="{{ topic.tutorial_video }}">
+        <input type="text" class="form-control" id="tutorial_video" name="tutorial_video" value="{{ topic.tutorialVideo }}" placeholder="Enter Tutorial Video URL" required>
     </div>
     <div class="form-group">
         <label for="practice_problem_one">Practice Problem #1</label>
-        <input type="text" class="form-control" id="practice_problem_one" name="practice_problem_one" value="{{ topic.practice_problem_one }}">
+        <input type="text" class="form-control" id="practice_problem_one" name="practice_problem_one" value="{{ topic.practiceProblemOne }}" placeholder="Enter Practice Problem #1" required>
     </div>
     <div class="form-group">
         <label for="solution_one">Solution #1</label>
-        <input type="text" class="form-control" id="solution_one" name="solution_one" value="{{ topic.solution_one }}">
+        <input type="text" class="form-control" id="solution_one" name="solution_one" value="{{ topic.solutionOne }}" placeholder="Enter Solution #1" required>
     </div>
     <div class="form-group">
         <label for="practice_problem_two">Practice Problem #2</label>
-        <input type="text" class="form-control" id="practice_problem_two" name="practice_problem_two" value="{{ topic.practice_problem_two }}">
+        <input type="text" class="form-control" id="practice_problem_two" name="practice_problem_two" value="{{ topic.practiceProblemTwo }}" placeholder="Enter Practice Problem #2" required>
     </div>
     <div class="form-group">
         <label for="solution_two">Solution #2</label>
-        <input type="text" class="form-control" id="solution_two" name="solution_two" value="{{ topic.solution_two }}">
+        <input type="text" class="form-control" id="solution_two" name="solution_two" value="{{ topic.solutionTwo }}" placeholder="Enter Solution #2" required>
     </div>
     <div class="form-group">
         <label for="practice_problem_three">Practice Problem #3</label>
-        <input type="text" class="form-control" id="practice_problem_three" name="practice_problem_three" value="{{ topic.practice_problem_three }}">
+        <input type="text" class="form-control" id="practice_problem_three" name="practice_problem_three" value="{{ topic.practiceProblemThree }}" placeholder="Enter Practice Problem #3" required>
     </div>
     <div class="form-group">
         <label for="solution_three">Solution #3</label>
-        <input type="text" class="form-control" id="solution_three" name="solution_three" value="{{ topic.solution_three }}">
+        <input type="text" class="form-control" id="solution_three" name="solution_three" value="{{ topic.solutionThree }}" placeholder="Enter Solution #3" required>
     </div>
     <button type="submit" class="btn btn-primary">Update Topic</button>
 </form>
+
+<script>
+    function checkChanges() {
+        var tutorialVideo = document.getElementById("tutorial_video").value;
+        var practiceProblemOne = document.getElementById("practice_problem_one").value;
+        var solutionOne = document.getElementById("solution_one").value;
+        var practiceProblemTwo = document.getElementById("practice_problem_two").value;
+        var solutionTwo = document.getElementById("solution_two").value;
+        var practiceProblemThree = document.getElementById("practice_problem_three").value;
+        var solutionThree = document.getElementById("solution_three").value;
+
+
+        if (!isValidEmbeddedYouTubeUrl(tutorialVideo)) {
+            alert("Please enter a valid embedded YouTube video URL.");
+            return false; // Prevent form submission
+        }
+        // Check if any input value is the same as the original topic data
+        if ((tutorialVideo == "{{ topic.tutorialVideo }}" ||
+            practiceProblemOne == "{{ topic.practiceProblemOne }}" ||
+            solutionOne == "{{ topic.solutionOne }}" ||
+            practiceProblemTwo == "{{ topic.practiceProblemTwo }}" ||
+            solutionTwo == "{{ topic.solutionTwo }}" ||
+            practiceProblemThree == "{{ topic.practiceProblemThree }}" ||
+            solutionThree == "{{ topic.solutionThree }}") &&
+            !(practiceProblemOne != "{{ topic.practiceProblemOne }}" && solutionOne != "{{ topic.solutionOne }}" ||
+            practiceProblemTwo != "{{ topic.practiceProblemTwo }}" && solutionTwo != "{{ topic.solutionTwo }}" ||
+            practiceProblemThree != "{{ topic.practiceProblemThree }}" && solutionThree != "{{ topic.solutionThree }}")) {
+            alert("Please change at least one input value before submitting.");
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+    function isValidEmbeddedYouTubeUrl(url) {
+        var youtubeUrlPattern = /^(https?:\/\/)?(www\.)?(youtube\.com\/embed\/|youtu\.be\/).+$/;
+        return youtubeUrlPattern.test(url);
+    }
+</script>
+
+
 {% endblock %}
