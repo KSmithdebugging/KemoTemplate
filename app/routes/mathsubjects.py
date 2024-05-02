@@ -98,6 +98,24 @@ def topicForm():
         return redirect(url_for("algebra"))
     return render_template('topic_form.html', form=form)
 
+@app.route('/mathLevel/updatetopic', methods=["GET","POST","PUT"])
+@login_required
+def updateTopic(topic_id):
+    foundTopics = retrieveTopics()
+    topic = None
+    for t in foundTopics:
+        if t['_id'] == topic_id:
+            topic = t
+            break
+    if request.method == "POST":
+        selected_topic_id = request.form.get("topic")
+        selected_topic = None
+        for topic in foundTopics:
+            if str(topic['_id']) == selected_topic_id:
+                selected_topic = topic
+                break
+        return redirect(url_for('updateTopicInfo', topic_id=topic_id))
+    return render_template('updatetopic.html', topic=topic)
 
 @app.route('/mathLevel/deletetopic', methods=["GET","POST"])
 @login_required
@@ -106,6 +124,7 @@ def deleteTopic():
         selected_topics = request.form.getlist('topic')
         for topic_id in selected_topics:
             collection.delete_one({'_id': ObjectId(topic_id)})
+        flash('Math topic was successfully deleted!', 'success')
         return render_template('algebra.html')
     foundTopics = retrieveTopics()
     return render_template('deletetopic.html', foundTopics = foundTopics)

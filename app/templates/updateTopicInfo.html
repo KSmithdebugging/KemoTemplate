@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Update Topic Information</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="tutorial_video">Tutorial Video</label>
+        <input type="text" class="form-control" id="tutorial_video" name="tutorial_video" value="{{ topic.tutorial_video }}">
+    </div>
+    <div class="form-group">
+        <label for="practice_problem_one">Practice Problem #1</label>
+        <input type="text" class="form-control" id="practice_problem_one" name="practice_problem_one" value="{{ topic.practice_problem_one }}">
+    </div>
+    <div class="form-group">
+        <label for="solution_one">Solution #1</label>
+        <input type="text" class="form-control" id="solution_one" name="solution_one" value="{{ topic.solution_one }}">
+    </div>
+    <div class="form-group">
+        <label for="practice_problem_two">Practice Problem #2</label>
+        <input type="text" class="form-control" id="practice_problem_two" name="practice_problem_two" value="{{ topic.practice_problem_two }}">
+    </div>
+    <div class="form-group">
+        <label for="solution_two">Solution #2</label>
+        <input type="text" class="form-control" id="solution_two" name="solution_two" value="{{ topic.solution_two }}">
+    </div>
+    <div class="form-group">
+        <label for="practice_problem_three">Practice Problem #3</label>
+        <input type="text" class="form-control" id="practice_problem_three" name="practice_problem_three" value="{{ topic.practice_problem_three }}">
+    </div>
+    <div class="form-group">
+        <label for="solution_three">Solution #3</label>
+        <input type="text" class="form-control" id="solution_three" name="solution_three" value="{{ topic.solution_three }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Update Topic</button>
+</form>
+{% endblock %}
