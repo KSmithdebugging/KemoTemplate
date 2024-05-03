@@ -1,56 +1,24 @@
 {% extends "base.html" %}
-{% block head %}
-<style>
-  .form-check-label {
-      padding-left: 25px;
-      position: relative;
-      cursor: pointer;
-  }
-
-  .form-check-label::before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      background-color: #fff;
-      border: 1px solid #adb5bd;
-      position: absolute;
-      left: 0;
-      top: 2px;
-  }
-
-  .form-check-input:checked + .form-check-label::before {
-      background-color: #007bff;
-      border-color: #007bff;
-  }
-
-  .form-check-input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-  }
-
-</style>
-
-{% endblock %}
 {% block body %}
-<h4>Delete Topic</h4>
-<form  method="post">
+<h4>Delete a Topic</h4>
+<form method="post">
   <div class="row">
-  <div class="col-md-4" class="form-check" style="display: inline-block;">
-    <div class="card mb-4" style="height: 400px;">
-    {% for item in foundTopics %}
-
-    <input type="checkbox" name="topic" class="form-check-input" value="{{ item._id }}">
-    <label for="vehicle1" class="form-check-label">{{item.mathLevel }}: {{ item.topicName }}</label><br>
-    {% endfor %}
-    <input type="submit" value="Delete Selected Topics"  class="btn btn-danger mt-auto">
+    <div class="col-md-4" style="display: inline-block; max-height: 400px; overflow-y: auto;">
+      <div class="card mb-4">
+        {% for item in foundTopics %}
+          <div class="form-check" style="position: relative; cursor: pointer;">
+            <input type="radio" name="topic" class="form-check-input" style="position: relative; opacity: 1; cursor: pointer;" value="{{ item._id }}">
+            <label class="form-check-label" style="padding-left: 25px; position: relative;">
+              {{item.mathLevel }}: {{ item.topicName }}
+            </label><br>
+          </div>
+        {% endfor %}
       </div>
     </div>
     <div class="col-md-4" style="display: inline-block; margin-left: 10%;">
       <img src="/static/settings.png" width="175%" height="auto">
     </div>
   </div>
-  </form>
-
+  <input type="submit" value="Delete Selected Topics" class="btn btn-danger mt-3">
+</form>
 {% endblock %}

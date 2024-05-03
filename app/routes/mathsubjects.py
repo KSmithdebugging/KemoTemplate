@@ -22,7 +22,7 @@ DEFAULT_THUMBNAIL_URL = "/static/default.jpg"
 
 def retrieveTopics():
     topics = []
-    data = list(collection.find().limit(9))
+    data = list(collection.find())
     for item in data:
         if 'tutorialVideo' in item:
             youtube_url = item['tutorialVideo']
